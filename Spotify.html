@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta name="viewport" content="width=device-width, user-scalable=no">
+        <script src="https://kit.fontawesome.com/ecb5391549.js" crossorigin="anonymous"></script>
+        <title>Spotify</title>
+        <link rel="stylesheet" href="Spotify.css"/>
+        <link rel="stylesheet" href="../icons/fa/css/all.css"/>
+    </head>
+    <body>
+    <!---Song to Play--->
+    	<audio src="" id="song_to_play"></audio>
+    <!---Loading Page--->
+        <div id="loading-page">
+            <img src="spotify.png" width="160px" height="160px">   
+        </div>
+    <!---Ending Loading Page--->
+    <!---Bottom nav--->
+        <div id="bottom_nav">
+            <i class="fa-solid fa-home"></i>
+            <i class="fa-solid fa-magnifying-glass" onclick="open_Search()"></i>
+            <i class="fa-solid fa-bookmark" onclick="open_Library()"></i>
+            <i class="fa-brands fa-spotify"></i>
+            <p>Home</p>
+            <p>Search</p>
+            <p>Library</p>
+            <p>Premium</p>
+        </div>
+    <!---Ending Bottom nav--->
+    <!---Starting miniplayer--->
+        <div id="miniplayer">
+        	<div id="mini_items">
+        		<div id="mini_image"></div>
+        		<div id="name_of_song">
+        			<marquee direction="left" loop="" scrollamount="3" id="song_marquee" onclick="growMaxi()">Am_Waiting.mp3</marquee>
+        		</div>
+        		<div id="mini_icons">
+        			<i id="like" class="far fa-heart" onclick="like()"></i>
+        			<i id="unlike" class="fas fa-heart" onclick="unlike()"></i>
+        			<i id="play_ic" class="fa fa-play" onclick="play()"></i>
+        			<i id="pause_ic" class="fa fa-pause" onclick="pause()"></i>
+        		</div>
+        	</div>
+        	<div id="mini_loader">
+        		<div id="mini_loader1"></div>
+        	</div>
+        </div>
+    <!---Ending miniplayer--->
+    <!---Maxi-player--->
+        <div id="maxiplayer">
+            <div id="maxi_top_icons">
+                <i id="maxi_angle" class="fas fa-angle-down" onclick="hide_maxi()"></i>
+                <i class="fa fa-ellipsis-v"></i>
+            </div>
+            <div id="maxi_image"></div>
+            <div id="maxi_maquee">
+                <maquee id="maxi_marquee">Lose_yourself.mp3 by Eminem</maquee>
+            </div>
+            <div id="maxi_footer">
+                <input id="maxi_inn_loader" type="range" min="0" value="0" seek="1">
+                <div id="maxi_counter">
+                    <span id="counting">0:0</span>
+                    <span id="maxi_dur">3:50</span>
+                </div>
+                <div id="maxi_icons">
+                    <i id="maxi_r_heart" class="far fa-heart" onclick="maxi_like()"></i>
+                    <i id="maxi_s_heart" class="fas fa-heart" onclick="maxi_unlike()"></i>
+                    <div id="maxi_prev" onclick="play_Song(event)">
+                        <i id="maxi_l_prev" class="fa fa-backward-step"></i>
+                    </div>
+                    <div id="maxi_pa_pl" onclick="play()">
+                        <i id="maxi_pl" class="fa fa-play"></i>
+                        <i id="maxi_pa" class="fa fa-pause"></i>
+                    </div>
+                    <div id="maxi_next" onclick="play_Song(event)">
+                        <i id="maxi_r_next" class="fa fa-forward-step"></i>
+                    </div>
+                    <div id="maxi_no_entry">
+                        <i id="maxi_minus" class="fa fa-minus"></i>
+                    </div>
+                </div><br><br><br><br>
+            </div>
+        </div>
+    <!---End MaxiPlayer--->
+    <!---Home Page--->
+        <div id="HomePage">
+        	<!---Top Bar--->
+        	<div id="top_bar">
+        		<div id="greetings">Good morning</div>
+        		<div id="top_icons">
+        			<i class="far fa-bell"></i>
+        			<i class="fa-solid fa-clock-rotate-left"></i>
+        			<i class="fa-solid fa-gear"></i>
+        		</div>
+        	</div><br>
+        	<!---Ending Top Bar--->
+        	<!---What you've listened--->
+        	<div id="gen_listened">
+        		<p>Music</p>
+        		<p>Poadcasts</p>
+        	</div><br>
+        	<!---End what you've listened--->
+        	<!---Start section before episode download--->
+        	<div id="s_holder">
+        		<div id="s_small_holder">
+        			<div id="s_holder_1">
+        				<i class="fa-solid fa-bookmark"></i>
+        			</div>
+        			<p id="s_holder_d1">Your Episodes</p>
+        		</div>
+        		<div id="s_small_holder">
+        			<div id="s_holder_2"></div>
+        			<div id="s_holder_d2">Eminem</div>
+        		</div>
+        		<div id="s_small_holder">
+        			<div id="s_holder_3"></div>
+        			<div id="s_holder_d3">Cecile</div>
+        		</div>
+        		<div id="s_small_holder">
+        			<div id="s_holder_4"></div>
+        			<div id="s_holder_d4">Ed Sheeran</div>
+        		</div>
+        	</div><br>
+        	<!---End Section>
+        	<!---Episode downloads--->
+        	<div id="s_eps_holder">
+        		<div id="s_eps_title">Episode downloads</div>
+        		<div id="s_eps_content"></div>
+        	</div>
+        	<!---End Episode download--->
+        	<!---New Episodes--->
+        	<div id="new_eps_container">
+        		<div id="new_eps_title">New Episodes</div>
+        		<div id="new_eps_content"></div>
+        	</div>
+        	<!---End New Episodes--->
+        </div>
+    <!---Ending Home Page--->
+    <!---Search Page--->
+        <div id="SearchPage">
+        	<div id="search_title_holder">Search</div>
+        	<div id="search_button_like_input">
+        		<i class="fa-solid fa-magnifying-glass"></i>
+        		<p>What do you want to listen to?</p>
+        	</div>
+        	<div id="search_browse_all">Browse all</div>
+        	<div id="search_category_content">
+        		<div class="music_categories" id="search_music">
+        			<div id="search_category_name">Music</div>
+        			<div id="search_category_cover"></div>
+        		</div>
+        	</div>
+        </div>
+    <!---Ending Search Page--->
+    <!---Starting Library Page--->
+        <div id="LibraryPage">
+        	<div id="library_title_holder">
+        		<div id="library_title">
+        			<div id="library_title_div1">U</div>
+        			<p id="library_title_p2">Your Library</p>
+        		</div>
+        		<div id="library_title_icons">
+        			<i class="fa fa-search"></i>
+        			<i class="fa fa-plus"></i>
+        		</div>
+        	</div>
+        	<div id="library_categories">
+        		<p>Downloaded</p>
+        		<p>Playlists</p>
+        	</div>
+        	<div id="library_div_after_category">
+        		<p id="library_div_after_p">Recently added</p>
+        		<i class="fa fa-list"></i>
+        	</div>
+        	<div id="library_content">
+        		<div id="library_liked">
+        			<div id="liked_icon_div">
+        				<i class="fa fa-heart"></i>
+        			</div>
+        			<div id="liked_info">
+        				<p id="liked_p_title">Liked Songs</p>
+        				<p id="liked_p1_title"><i class="fa-solid fa-thumbtack"></i>Playlist.<span id="liked_num">36</span>songs</p>
+        			</div>
+        		</div>
+        		<div id="library_eps">
+        			<div id="eps_icon_div">
+        				<i class="fa fa-bookmark"></i>
+        			</div>
+        			<div id="bookmark_info">
+        				<p id="bookmark_p_title">Your Episodes</p>
+        				<p id="bookmark_p1_title"><i class="fa-solid fa-thumbtack" id="thumb"></i><i class="fas fa-arrow-down" id="arrow_1"></i>Saved</p>
+        		    </div>
+        		</div>
+        		<div id="library_local" onclick="open_Local()">
+        			<div id="local_icon_div">
+        				<i class="fa fa-folder"></i>
+        			</div>
+        			<div id="bookmark_info">
+        				<p id="bookmark_p_title">Local Files</p>
+        				<p id="bookmark_p1_title"><i class="fa-solid fa-thumbtack" id="thumb"></i><i class="fas fa-arrow-down" id="arrow_1"></i>Playlist.<span id="folder_count">57</span>tracks</p>
+        		    </div>
+        		</div>
+        		<div id="library_hiphop">
+        			<div id="hiphop_icon_div" style="background-image:url('Images/Artists/Eminem.jpg');background-size:cover;"></div>
+        			<div id="bookmark_info">
+        				<p id="bookmark_p_title">Eminem</p>
+        				<p id="bookmark_p1_title">Music.Eminem</p>
+        		    </div>
+        		</div>
+        	</div>
+        </div>
+    <!---Ending Library Page--->
+    <!---Open Local Music Page--->
+        <div id="LocalMusicPage">
+        	<div id="local_title">
+        		<i class="fa fa-arrow-left"></i>
+        		<p id="local_title_p">Local Files</p>
+        	</div>
+        	<div id="local_after_title">
+        		<div id="title_search_div">
+        			<i class="fa fa-magnifying-glass"></i>
+        			<input id="title_search" placeholder="Find in">
+        		</div>
+        		<div id="local_title_info">
+        			<p id="local_p1">Local Files<br><span id="local_p2"><span id="local_counter">13</span> songs</span></p>
+        			<div id="title_play">
+        	           <i class="fa fa-play"></i>
+                    </div>
+        		</div>
+        	</div>
+        	
+            <div id="title_song_holder"></div><br><br><br>
+        </div>
+    <!---Ending Local Music Page--->
+    </body>
+    <script src="Spotify.js"></script>
+</html>
